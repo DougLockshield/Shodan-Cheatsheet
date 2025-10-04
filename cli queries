@@ -1,0 +1,115 @@
+# 🧪 Comandos via CLI (Terminal)
+
+## Instalação da CLI do Shodan
+```bash
+pip install shodan
+shodan init SUA_API_KEY
+```
+
+## Exemplos úteis
+```bash
+shodan search apache
+shodan search port:21 country:BR
+shodan search "os:Windows 7 country:BR" --fields ip_str,port,org,product,version,vulns --limit 50
+shodan host IP
+```
+
+## Exportar resultado para CSV
+```bash
+shodan search "apache country:BR" --fields ip_str,port --limit 50 > apache_br.csv
+```
+
+## Busca por CVE
+```bash
+shodan search vuln:CVE-2021-26855
+```
+# 🔹 Buscas básicas
+shodan search apache
+shodan search nginx
+shodan search port:21 country:BR
+shodan search "os:Windows 7"
+shodan host 201.45.132.22
+shodan host 8.8.8.8
+
+# 🔹 Campos personalizados
+shodan search apache --fields ip_str,port,org
+shodan search nginx --fields ip_str,port,product,version
+shodan search "os:Windows 7 country:BR" --fields ip_str,port,org,product,version --limit 50
+
+# 🔹 Buscas com CVE
+shodan search vuln:"CVE-*"
+shodan search vuln:CVE-2019-0708 --fields ip_str,port,org
+shodan search "fortinet" --fields ip_str,vulns
+shodan search "mikrotik" vuln:CVE-2018-14847
+
+# 🔹 Organização / ASN
+shodan search org:"Microsoft Corporation"
+shodan search asn:AS28573 country:BR --fields ip_str,port,org
+
+# 🔹 Serviços específicos
+shodan search port:3389
+shodan search "Anonymous user logged in"
+shodan search product:elasticsearch
+shodan search "X-Powered-By: PHP/5.6.40"
+shodan search "Server: Apache"
+
+# 🔹 Localização geográfica
+shodan search "webcam" country:US
+shodan search "os:windows" country:BR
+shodan search city:"São Paulo"
+
+# 🔹 Certificados SSL/TLS
+shodan search ssl.cert.issuer.cn:"Let's Encrypt"
+shodan search ssl.cert.expired:true
+shodan search ssl.version:sslv3
+shodan search ssl.cert.subject.cn:"*.gov.br"
+
+# 🔹 Banners HTTP
+shodan search "http.title:'Login Page'"
+shodan search "http.html:Unauthorized"
+shodan search "http.favicon.hash:-1372627182"
+shodan search "product:nginx" http.html:"Admin Panel"
+
+# 🔹 IoT e Webcams
+shodan search has_screenshot:true
+shodan search hikvision
+shodan search "Server: GoAhead-Webs"
+shodan search "title:WebcamXP"
+
+# 🔹 Agrupamentos (facets)
+shodan stats apache --facets country
+shodan stats nginx --facets org
+shodan stats "port:22" --facets city
+shodan stats "apache" --facets port
+
+# 🔹 Exportar resultados
+shodan search "apache country:BR" --fields ip_str,port,org,product --limit 100 > apache_brasil.csv
+shodan search "nginx" --fields ip_str,port,org --limit 50 > nginx.csv
+
+# 🔹 Consultar IP
+shodan host IP
+shodan host IP
+
+# 🔹 Buscar por protocolo
+shodan search "ftp" port:21
+shodan search "ssh" port:22
+shodan search "telnet" port:23
+
+# 🔹 Dorks mistos úteis
+shodan search "port:5900 authentication disabled"
+shodan search "title:Zabbix"
+shodan search "product:MongoDB" port:27017
+shodan search "product:MySQL" port:3306
+shodan search "title:'phpMyAdmin'"
+shodan search "X-AMF-Version: 3"
+shodan search "X-Jenkins"
+
+# 🔹 Busca por tempo/última detecção
+shodan search apache after:"2024-01-01"
+shodan search "nginx" before:"2025-01-01"
+shodan search "windows" --timeout 10
+
+# 🔹 Extras
+shodan info
+shodan myip
+shodan count "nginx country:BR"
