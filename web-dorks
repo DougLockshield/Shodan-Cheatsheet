@@ -1,0 +1,136 @@
+# 🔍 DORKS PARA USO NA INTERFACE WEB DO SHODAN
+
+## Dorks úteis e combinados
+- Dispositivos com RDP no Brasil:
+```
+port:3389 country:BR
+```
+
+- Câmeras IP sem senha:
+```
+netcam has_screenshot:true
+```
+
+- Servidores Windows 7 expostos:
+```
+os:"Windows 7"
+```
+
+- Roteadores MikroTik:
+```
+mikrotik port:8291
+```
+
+- Vulnerabilidades CVE:
+```
+vuln:CVE-2020-0601
+```
+
+- Impressoras abertas:
+```
+product:"HP JetDirect"
+```
+
+# 🔹 Busca por serviços
+product:"Apache httpd"
+product:"nginx"
+product:"OpenSSH"
+product:"Microsoft-IIS"
+product:"Elasticsearch"
+product:"MongoDB"
+product:"phpMyAdmin"
+product:"MySQL"
+
+# 🔹 Busca por títulos de páginas
+http.title:"Admin Login"
+http.title:"Welcome"
+http.title:"Index of /"
+http.title:"Dashboard"
+http.title:"Login Panel"
+http.title:"Control Panel"
+
+# 🔹 Busca por conteúdo HTML
+http.html:"Unauthorized"
+http.html:"root:"
+http.html:"admin"
+http.html:"device info"
+http.html:"摄像头"        # Câmera em chinês
+http.html:"Network Camera"
+
+# 🔹 Busca por headers
+http.headers.server:"GoAhead-Webs"
+http.headers.server:"Apache"
+http.headers.server:"nginx"
+http.headers.server:"Microsoft-IIS"
+http.headers.set-cookie:"PHPSESSID"
+
+# 🔹 Busca por favicon
+http.favicon.hash:-1372627182   # phpMyAdmin
+http.favicon.hash:-247388890    # Jenkins
+http.favicon.hash:116323821     # D-Link webcam
+http.favicon.hash:-335242539    # Router login
+http.favicon.hash:1502865313    # Zabbix
+
+# 🔹 Busca por certificados SSL
+ssl.cert.issuer.cn:"Let's Encrypt"
+ssl.cert.issuer.cn:"Cloudflare, Inc."
+ssl.cert.subject.cn:"*.gov.br"
+ssl.cert.subject.cn:"*.edu.br"
+
+# 🔹 Busca por protocolos e serviços específicos
+port:21  "220"                   # FTP
+port:22  "OpenSSH"               # SSH
+port:23  "login:"                # Telnet
+port:80  "Server: Apache"        # HTTP
+port:443 "SSL"                   # HTTPS
+port:3306 "MySQL"
+port:27017 "MongoDB"
+port:6379 "Redis"
+port:5000 "Server: Werkzeug"     # Flask dev server
+
+# 🔹 Busca por localização
+country:"BR"
+country:"US"
+country:"RU"
+country:"CN"
+city:"São Paulo"
+city:"New York"
+
+# 🔹 Busca por organização / ASN
+org:"Claro S.A."
+org:"Oi"
+org:"Vivo"
+asn:AS28573
+asn:AS15169
+
+# 🔹 Busca por vulnerabilidades
+vuln:"CVE-2021-26855"
+vuln:"CVE-2020-0601"
+vuln:"CVE-2020-0796"
+vuln:"CVE-2019-0708"
+
+# 🔹 Busca por dispositivos IoT
+"Server: Boa/0.94.14rc21"
+"Server: GoAhead-Webs"
+"Server: uc-httpd"
+"Server: webcamXP"
+"Server: GWS"
+"Server: Netwave IP Camera"
+"Server: Dreambox HTTP Server"
+
+# 🔹 Outros dorks úteis
+has_screenshot:true
+tag:"default"
+tag:"industrial"
+os:"Windows 7"
+os:"Windows XP"
+os:"Linux 2.6.x"
+after:"2025-01-01"
+before:"2024-01-01"
+
+# 🔹 Dorks combinados
+product:"Apache" country:"BR" port:80
+"MongoDB" port:27017 -authentication
+product:"MySQL" city:"Rio de Janeiro"
+http.title:"phpMyAdmin" country:"US"
+ssl:"expired:true" org:"Universidade"
